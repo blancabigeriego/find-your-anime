@@ -29,13 +29,15 @@ function renderHTML(){
     let html = '';
 
     for (const anime of animes) {
+            html += `<li class= list>`
             html+= `<img
             src=${anime.images.jpg.image_url}
             alt="img"
-            class="js-img"
+            class="image js-img"
           />`
           html +=`<p class="js-title">${anime.title}</p>
           </li>`
+          html += `</li>`
         };
 
         ulResults.innerHTML = html;
@@ -43,17 +45,7 @@ function renderHTML(){
     }
     
     
-    fetch('https://api.jikan.moe/v4/anime?q=')
     
-    .then((response) => response.json())
-    .then((data) => {
-        console.log(data);
-        animes = data.data;
-        console.log(animes);
-        
-
-
-    });
     
 
 
@@ -63,6 +55,20 @@ function handleClick(ev) {
     ev.preventDefault();
     let inputValue = input.value;
     console.log(inputValue);
+
+    fetch(`https://api.jikan.moe/v4/anime?q=${inputValue}`)
+    
+    .then((response) => response.json())
+    .then((data) => {
+        console.log(data);
+        
+        animes = data.data;
+        
+        console.log(animes);
+        
+
+
+    });
     renderHTML();
 
 }

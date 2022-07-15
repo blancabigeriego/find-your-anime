@@ -1,6 +1,6 @@
 'use strict';
 
-const { off } = require("gulp");
+
 
 console.log('>> Ready :)');
 
@@ -30,15 +30,19 @@ function handleClick(ev) {
     .then((data) => {
         animes = data.data;
         console.log(animes);
+        let html = '';
 
-        
-        ulResults.innerHTML = `<img
-        src="https://via.placeholder.com/200x300.jpg"
-        alt="placeholder"
-        class="js-img"
-      />
-      <p class="js-title">Titulo del anime</p>
-    </li>`;
+        for (const anime of animes) {
+            html+= `<img
+            src=${anime.images.jpg.image_url}
+            alt="img"
+            class="js-img"
+          />`
+          html +=`<p class="js-title">${anime.title}</p>
+          </li>`
+        };
+        ulResults.innerHTML = html;
+      ;
 
 
     });

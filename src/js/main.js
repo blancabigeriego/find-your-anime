@@ -5,6 +5,7 @@
 console.log('>> Ready :)');
 
 //QUERY SELECTOR
+
 const input = document.querySelector('.js-input');
 const btnSearch = document.querySelector('.js-btn-search');
 const btnReset = document.querySelector('.js-btn-reset');
@@ -13,26 +14,21 @@ const animeTitleResultParagraph = document.querySelector('.js-title');
 const ulResults = document.querySelector('.js-result-list');
 
 //VARIABLES GLOBALES
+
 let animes = [];
 
 
 
 
+//FUNCIONES
 
-function handleClick(ev) {
-    ev.preventDefault();
-    let inputValue = input.value;
-    console.log(inputValue);
 
-    fetch('https://api.jikan.moe/v4/anime?q=')
+
     
-    .then((response) => response.json())
-    .then((data) => {
-        animes = data.data;
-        console.log(animes);
-        let html = '';
+function renderHTML(){
+    let html = '';
 
-        for (const anime of animes) {
+    for (const anime of animes) {
             html+= `<img
             src=${anime.images.jpg.image_url}
             alt="img"
@@ -41,12 +37,33 @@ function handleClick(ev) {
           html +=`<p class="js-title">${anime.title}</p>
           </li>`
         };
+
         ulResults.innerHTML = html;
       ;
+    }
+    
+    
+    fetch('https://api.jikan.moe/v4/anime?q=')
+    
+    .then((response) => response.json())
+    .then((data) => {
+        console.log(data);
+        animes = data.data;
+        console.log(animes);
+        
 
 
     });
     
+
+
+//FUNCIONES DE EVENTO
+
+function handleClick(ev) {
+    ev.preventDefault();
+    let inputValue = input.value;
+    console.log(inputValue);
+    renderHTML();
 
 }
 

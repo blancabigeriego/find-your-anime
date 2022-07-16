@@ -29,6 +29,7 @@ let favourites = [];
 function renderFavouriteList(){
   let html = '';
   for (const anime of favourites){
+    
     html += `<li class="list--favourite js-list-anime" id="${anime.title}">`;
     html+= `<img
     src=${anime.images.jpg.image_url}
@@ -38,16 +39,17 @@ function renderFavouriteList(){
     html +=`<p class="js-title">${anime.title}</p>
     </li>`;
     html += `</li>`;
+    
   }
 
-  ulResultFavourites.innerHTML = html;
+  ulResultFavourites.innerHTML = `<h2>Series favoritas:<h2>${html}`;
   listenerAnime();
 
 }
 
 
 function renderHTML(){
-    let html = '';
+    let html ='';
     
     let classFavourite = '';
 
@@ -61,7 +63,7 @@ function renderHTML(){
       }else{
         classFavourite = '';
       }
-
+           
             html += `<li class="list${classFavourite} js-list-anime" id="${anime.title}">`;
             html+= `<img
             src=${anime.images.jpg.image_url}
@@ -73,7 +75,7 @@ function renderHTML(){
           html += `</li>`;
         };
 
-        ulResults.innerHTML = html;
+        ulResults.innerHTML =  `<h2>Resultados<h2>${html}`;
         
         listenerAnime();
         

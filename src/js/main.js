@@ -30,9 +30,18 @@ let favourites = [];
     
 function renderHTML(){
     let html = '';
+    let classFavourite = '';
 
     for (const anime of animes) {
-            html += `<li class= "list js-list-anime" id="${anime.title}">`;
+
+      const favouriteFoundIndex = favourites.findIndex((fav) => anime.title === fav.title);
+      if (favouriteFoundIndex !== -1){
+        classFavourite = '--favourite';
+      }else{
+        classFavourite = '';
+      }
+
+            html += `<li class="list${classFavourite} js-list-anime" id="${anime.title}">`;
             html+= `<img
             src=${anime.images.jpg.image_url}
             alt="img"
@@ -89,7 +98,9 @@ function handleFavouriteClick(event){
   } else {
     favourites.splice(favouriteFound, 1);
   }
+
   console.log(favourites);
+  renderHTML();
   
 
   

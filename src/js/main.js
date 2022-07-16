@@ -5,6 +5,8 @@
 
 
 
+
+
 //QUERY SELECTOR
 
 const input = document.querySelector('.js-input');
@@ -73,9 +75,10 @@ function renderHTML(){
           html +=`<p class="js-title">${anime.title}</p>
           </li>`;
           html += `</li>`;
-        };
+        }
 
-        ulResults.innerHTML =  `<h2>Resultados<h2>${html}`;
+        listenerAnime();
+        ulResults.innerHTML = `<h2>Resultados:</h2>${html}`;
         
         listenerAnime();
         
@@ -83,7 +86,19 @@ function renderHTML(){
     }
     
     
+function getDataFromApi(){
+  let inputValue = input.value;
+  fetch(`https://api.jikan.moe/v4/anime?q=${inputValue}`)
     
+    .then((response) => response.json())
+    .then((data) => {
+      animes = data.data;
+      console.log(animes);
+
+    });
+    renderHTML();
+    listenerAnime();
+}    
     
 
 
@@ -91,25 +106,7 @@ function renderHTML(){
 
 function handleClick(ev) {
     ev.preventDefault();
-    let inputValue = input.value;
-    
-
-    fetch(`https://api.jikan.moe/v4/anime?q=${inputValue}`)
-    
-    .then((response) => response.json())
-    .then((data) => {
-        
-        
-        animes = data.data;
-        
-        console.log(animes);
-        
-
-
-    });
-    renderHTML();
-    listenerAnime();
-
+    getDataFromApi();
 }
 
 
@@ -126,6 +123,7 @@ function handleFavouriteClick(event){
   }
 
   console.log(favourites);
+  localStorage.setItem('fav', JSON.stringify(favourites));
   renderHTML();
   listenerAnime();
 }
@@ -138,8 +136,16 @@ function listenerAnime(){
   }
 }
 
+//FUNCION LOCAL STORAGE
 
+function onLoad(){
+  const dataLocalStorage = JSON.parse(localStorage.getItem('fav'));
+  if(dataLocalStorage){
+    console.log('Hay cosas en el LS');
 
-
-
+  }else{
+    getDataFromApi();
+  }
+}
+onLoad();
 btnSearch.addEventListener('click', handleClick);

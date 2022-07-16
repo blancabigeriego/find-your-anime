@@ -21,6 +21,7 @@ const ulResultFavourites = document.querySelector('.js-result-favourites');
 
 let animes = [];
 let favourites = [];
+let wrongImgAnimes = [];
 
 
 
@@ -43,8 +44,9 @@ function renderFavouriteList(){
     html += `</li>`;
     
   }
-
-  ulResultFavourites.innerHTML = `<h2>Series favoritas:<h2>${html}`;
+  
+    ulResultFavourites.innerHTML = `<h2>Series favoritas:<h2>${html}`;
+  
   listenerAnime();
 
 }
@@ -118,7 +120,7 @@ function handleFavouriteClick(event){
   const favouriteFound = favourites.findIndex((fav)=> fav.title === idSelected);
   if(favouriteFound === -1){
     favourites.push(animeFound);
-  } else {
+} else {
     favourites.splice(favouriteFound, 1);
   }
 
@@ -142,7 +144,6 @@ function onLoad(){
   const dataLocalStorage = JSON.parse(localStorage.getItem('fav'));
   if(dataLocalStorage){
     console.log('Hay cosas en el LS');
-    favourites = dataLocalStorage;
     renderFavouriteList(dataLocalStorage);
 
   }else{
@@ -150,4 +151,14 @@ function onLoad(){
   }
 }
 onLoad();
+
+//FUNCION BUSCAR ANIMES SIN IMG:
+function findAnimeWrongImg(){
+ const wrongPictureAnime = animes.filter((anime) => anime.images.jpg.image_url  === 'https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png');
+  console.log(wrongPictureAnime);
+}
+findAnimeWrongImg();
+
+
+//EVENTOS:
 btnSearch.addEventListener('click', handleClick);

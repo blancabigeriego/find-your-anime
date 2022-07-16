@@ -142,6 +142,8 @@ function onLoad(){
   const dataLocalStorage = JSON.parse(localStorage.getItem('fav'));
   if(dataLocalStorage){
     console.log('Hay cosas en el LS');
+    favourites = dataLocalStorage;
+    renderFavouriteList(dataLocalStorage);
 
   }else{
     getDataFromApi();

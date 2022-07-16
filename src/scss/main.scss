@@ -7,11 +7,14 @@
 @import 'layout/footer';
 @import 'pages/index';*/
 
-
+.results{
+    display: flex;
+    
+}
 .list{
     list-style: none;
-    background-color: aqua;
-    color: white;
+    background-color: whitesmoke;
+    color: aqua;
     width: 300px;
     display: flex;
     justify-content: center;
@@ -26,8 +29,8 @@
 
     &--favourite{
         list-style: none;
-        background-color: white;
-        color: aqua;
+        background-color: aqua;
+        color: whitesmoke;
         width: 300px;
         display: flex;
         justify-content: center;

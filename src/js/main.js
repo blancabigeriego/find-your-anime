@@ -13,7 +13,7 @@ const btnReset = document.querySelector('.js-btn-reset');
 const img = document.querySelector('.js-img');
 const animeTitleResultParagraph = document.querySelector('.js-title');
 const ulResults = document.querySelector('.js-result-list');
-
+const ulResultFavourites = document.querySelector('.js-result-favourites');
 
 //VARIABLES GLOBALES
 
@@ -26,10 +26,29 @@ let favourites = [];
 //FUNCIONES
 
 
+function renderFavouriteList(){
+  let html = '';
+  for (const anime of favourites){
+    html += `<li class="list--favourite js-list-anime" id="${anime.title}">`;
+    html+= `<img
+    src=${anime.images.jpg.image_url}
+    alt="img"
+    class="image js-img"
+    />`;
+    html +=`<p class="js-title">${anime.title}</p>
+    </li>`;
+    html += `</li>`;
+  }
 
-    
+  ulResultFavourites.innerHTML = html;
+  listenerAnime();
+
+}
+
+
 function renderHTML(){
     let html = '';
+    
     let classFavourite = '';
 
     for (const anime of animes) {
@@ -37,6 +56,8 @@ function renderHTML(){
       const favouriteFoundIndex = favourites.findIndex((fav) => anime.title === fav.title);
       if (favouriteFoundIndex !== -1){
         classFavourite = '--favourite';
+        renderFavouriteList();
+
       }else{
         classFavourite = '';
       }
@@ -53,8 +74,10 @@ function renderHTML(){
         };
 
         ulResults.innerHTML = html;
+        
         listenerAnime();
-      ;
+        
+      
     }
     
     
@@ -83,6 +106,7 @@ function handleClick(ev) {
 
     });
     renderHTML();
+    listenerAnime();
 
 }
 
@@ -101,10 +125,7 @@ function handleFavouriteClick(event){
 
   console.log(favourites);
   renderHTML();
-  
-
-  
-
+  listenerAnime();
 }
 
 

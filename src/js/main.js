@@ -47,7 +47,7 @@ function renderFavouriteList(favourites){
           class="image js-img"
         />`;
     }
-    html +=`<p class="js-title">${anime.title}</p>
+    html +=`<p class="js-title favtitle">${anime.title}</p> <i class="fa-solid fa-circle-xmark icon"></i>
     </li>`;
     html += `</li>`;
   }

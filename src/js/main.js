@@ -93,8 +93,9 @@ function renderHTML(){
           </li>`;
     html += `</li>`;}
 
-  listenerAnime();
+  
   ulResults.innerHTML = `<h2>Resultados:</h2>${html}`;
+  
         
   listenerAnime();
 }
@@ -123,8 +124,8 @@ function setLs(favourites){
 //FUNCIONES DE EVENTO
 
 function handleClick(ev) {
-    ev.preventDefault();
-    getDataFromApi();
+  ev.preventDefault();
+  getDataFromApi();
 }
 
 

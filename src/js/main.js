@@ -12,9 +12,11 @@
 const input = document.querySelector('.js-input');
 const btnSearch = document.querySelector('.js-btn-search');
 const btnReset = document.querySelector('.js-btn-reset');
-const animeTitleResultParagraph = document.querySelector('.js-title');
 const ulResults = document.querySelector('.js-result-list');
 const ulResultFavourites = document.querySelector('.js-result-favourites');
+
+
+
 
 //VARIABLES GLOBALES
 
@@ -47,10 +49,11 @@ function renderFavouriteList(favourites){
           class="image js-img"
         />`;
     }
-    html +=`<p class="js-title favtitle">${anime.title}</p> <i class="fa-solid fa-circle-xmark icon"></i>
+    html +=`<p class="js-title favtitle">${anime.title}</p> <i class="js-icon fa-solid fa-circle-xmark icon"></i>
     </li>`;
     html += `</li>`;
   }
+   addListenerIcons();
   ulResultFavourites.innerHTML = `<h2>Series favoritas:<h2>${html}`;
   listenerAnime();
 
@@ -121,6 +124,10 @@ function setLs(favourites){
   listenerAnime();
 }
 
+function handleIconClick(){
+  console.log('Hey hey hey');
+}
+
 //FUNCIONES DE EVENTO
 
 function handleClick(ev) {
@@ -149,6 +156,7 @@ function handleFavouriteClick(event){
 
 function listenerAnime(){
   const liAnime = document.querySelectorAll('.js-list-anime');
+  
   for (const anime of liAnime) {
     anime.addEventListener('click', handleFavouriteClick);
   }
@@ -157,6 +165,13 @@ function listenerAnime(){
 function handleReset(ev){
   ev.preventDefault();
   ulResults.innerHTML = '';
+}
+
+function addListenerIcons(){
+  const icons = document.querySelectorAll('.js-icon');
+  for (const icon of icons) {
+    icon.addEventListener('click', handleIconClick);
+  }
 }
 
 //FUNCION LOCAL STORAGE
@@ -182,3 +197,4 @@ onLoad();
 //EVENTOS:
 btnSearch.addEventListener('click', handleClick);
 btnReset.addEventListener('click',handleReset);
+

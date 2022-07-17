@@ -12,7 +12,6 @@
 const input = document.querySelector('.js-input');
 const btnSearch = document.querySelector('.js-btn-search');
 const btnReset = document.querySelector('.js-btn-reset');
-const img = document.querySelector('.js-img');
 const animeTitleResultParagraph = document.querySelector('.js-title');
 const ulResults = document.querySelector('.js-result-list');
 const ulResultFavourites = document.querySelector('.js-result-favourites');
@@ -152,6 +151,11 @@ function listenerAnime(){
   }
 }
 
+function handleReset(ev){
+  ev.preventDefault();
+  ulResults.innerHTML = '';
+}
+
 //FUNCION LOCAL STORAGE
 
 function onLoad(){
@@ -173,3 +177,5 @@ onLoad();
 
 //EVENTOS:
 btnSearch.addEventListener('click', handleClick);
+btnReset.addEventListener('click',handleReset);
+

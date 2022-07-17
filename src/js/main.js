@@ -34,11 +34,12 @@ function renderFavouriteList(favourites){
   let html = '';
   for (const anime of favourites){
     const wrongImg = 'https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png';
+    const placeholder = 'https://via.placeholder.com/210x295/ffffff/666666/?text=FAV-ANIME';
 
     html += `<li class="list--favourite" id="${anime.title}">`;
     if( anime.images.jpg.image_url === wrongImg){
       html+= `<img
-          src=${'https://via.placeholder.com/210x295/ffffff/666666/?text=FAV-ANIME'}
+          src=${placeholder}
           alt="img"
           class="image js-img"/>`;
     }
@@ -53,11 +54,16 @@ function renderFavouriteList(favourites){
     </li>`;
     html += `</li>`;
   }
-   addListenerIcons();
-  ulResultFavourites.innerHTML = `<h2>Series favoritas:<h2>${html}`;
-  listenerAnime();
+  const icons = document.querySelectorAll('.js-icon');
+  addListenerIcons(icons);
 
-}
+  if(favourites === ''){
+    ulResultFavourites.innerHTML = '';
+  }else{
+    ulResultFavourites.innerHTML = `<h2>Series favoritas:<h2>${html}`;
+   
+
+  }}
 
 
 function renderHTML(){
@@ -66,6 +72,7 @@ function renderHTML(){
 
   for (const anime of animes) {
     const wrongImg = 'https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png';
+    const placeholder = 'https://via.placeholder.com/210x295/ffffff/666666/?text=ANIME';
     const favouriteFoundIndex = favourites.findIndex((fav) => anime.title === fav.title);
     if (favouriteFoundIndex !== -1){
       classFavourite = '--favourite';
@@ -79,7 +86,7 @@ function renderHTML(){
 
     if( anime.images.jpg.image_url === wrongImg){
       html+= `<img
-            src=${'https://via.placeholder.com/210x295/ffffff/666666/?text=ANIME'}
+            src=${placeholder}
             alt="img"
             class="image js-img"/>`;
     }
@@ -96,9 +103,11 @@ function renderHTML(){
           </li>`;
     html += `</li>`;}
 
-  
-  ulResults.innerHTML = `<h2>Resultados:</h2>${html}`;
-  
+  if (html === ''){
+    ulResults.innerHTML ='';
+  }else{
+    ulResults.innerHTML = `<h2>Resultados:</h2>${html}`;
+  }
         
   listenerAnime();
 }
@@ -120,7 +129,6 @@ function getDataFromApi(){
 function setLs(favourites){
   localStorage.setItem('fav', JSON.stringify(favourites));
   renderHTML();
-  
   listenerAnime();
 }
 
@@ -140,7 +148,7 @@ function handleClick(ev) {
 function handleFavouriteClick(event){
   
   const idSelected = event.currentTarget.id;
-  console.log('clique en' + event.currentTarget.id);
+  console.log('clique en ' + event.currentTarget.id);
   const animeFound = animes.find((anime)=> anime.title === idSelected);
   const favouriteFound = favourites.findIndex((fav)=> fav.title === idSelected);
   if(favouriteFound === -1){
@@ -167,8 +175,8 @@ function handleReset(ev){
   ulResults.innerHTML = '';
 }
 
-function addListenerIcons(){
-  const icons = document.querySelectorAll('.js-icon');
+function addListenerIcons(icons){
+  
   for (const icon of icons) {
     icon.addEventListener('click', handleIconClick);
   }

@@ -21,7 +21,7 @@ const ulResultFavourites = document.querySelector('.js-result-favourites');
 
 let animes = [];
 let favourites = [];
-let wrongImgAnimes = [];
+
 
 
 
@@ -51,62 +51,54 @@ function renderFavouriteList(){
     html +=`<p class="js-title">${anime.title}</p>
     </li>`;
     html += `</li>`;
-    
   }
-  
-    ulResultFavourites.innerHTML = `<h2>Series favoritas:<h2>${html}`;
-  
+  ulResultFavourites.innerHTML = `<h2>Series favoritas:<h2>${html}`;
   listenerAnime();
 
 }
 
 
 function renderHTML(){
-    let html ='';
-    
-    let classFavourite = '';
+  let html ='';
+  let classFavourite = '';
 
-    for (const anime of animes) {
-      const wrongImg = 'https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png';
-      const favouriteFoundIndex = favourites.findIndex((fav) => anime.title === fav.title);
-      if (favouriteFoundIndex !== -1){
-        classFavourite = '--favourite';
-        renderFavouriteList();
+  for (const anime of animes) {
+    const wrongImg = 'https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png';
+    const favouriteFoundIndex = favourites.findIndex((fav) => anime.title === fav.title);
+    if (favouriteFoundIndex !== -1){
+      classFavourite = '--favourite';
+      renderFavouriteList();
 
-      }else{
-        classFavourite = '';
-      }
+    }else{
+      classFavourite = '';
+    }
 
-      html += `<li class="list${classFavourite} js-list-anime" id="${anime.title}">`;
+    html += `<li class="list${classFavourite} js-list-anime" id="${anime.title}">`;
 
-      if( anime.images.jpg.image_url === wrongImg){
-        html+= `<img
+    if( anime.images.jpg.image_url === wrongImg){
+      html+= `<img
             src=${'https://via.placeholder.com/210x295/ffffff/666666/?text=ANIME'}
             alt="img"
             class="image js-img"/>`;
-      }
-      else {
-        html+= `<img
+    }
+    else {
+      html+= `<img
             src=${anime.images.jpg.image_url}
             alt="img"
             class="image js-img"
           />`;
-      }
+    }
            
             
-            
-          html +=`<p class="js-title">${anime.title}</p>
+    html +=`<p class="js-title">${anime.title}</p>
           </li>`;
-          html += `</li>`;
-        }
+    html += `</li>`;}
 
-        listenerAnime();
-        ulResults.innerHTML = `<h2>Resultados:</h2>${html}`;
+  listenerAnime();
+  ulResults.innerHTML = `<h2>Resultados:</h2>${html}`;
         
-        listenerAnime();
-        
-      
-    }
+  listenerAnime();
+}
     
     
 function getDataFromApi(){
@@ -117,16 +109,16 @@ function getDataFromApi(){
     .then((data) => {
       animes = data.data;
       console.log(animes);
-
     });
-
- 
-
   renderHTML();
   listenerAnime();
 }    
     
-
+function setLs(){
+  localStorage.setItem('fav', JSON.stringify(favourites));
+  renderHTML();
+  listenerAnime();
+}
 
 //FUNCIONES DE EVENTO
 
@@ -149,9 +141,7 @@ function handleFavouriteClick(event){
   }
 
   console.log(favourites);
-  localStorage.setItem('fav', JSON.stringify(favourites));
-  renderHTML();
-  listenerAnime();
+  setLs();
 }
 
 
@@ -178,7 +168,6 @@ function onLoad(){
 }
 onLoad();
 
-//FUNCION BUSCAR ANIMES SIN IMG:
 
 
 

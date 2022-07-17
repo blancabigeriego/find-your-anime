@@ -32,13 +32,22 @@ let wrongImgAnimes = [];
 function renderFavouriteList(){
   let html = '';
   for (const anime of favourites){
-    
+    const wrongImg = 'https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png';
+
     html += `<li class="list--favourite js-list-anime" id="${anime.title}">`;
-    html+= `<img
-    src=${anime.images.jpg.image_url}
-    alt="img"
-    class="image js-img"
-    />`;
+    if( anime.images.jpg.image_url === wrongImg){
+      html+= `<img
+          src=${'https://via.placeholder.com/210x295/ffffff/666666/?text=FAV-ANIME'}
+          alt="img"
+          class="image js-img"/>`;
+    }
+    else {
+      html+= `<img
+          src=${anime.images.jpg.image_url}
+          alt="img"
+          class="image js-img"
+        />`;
+    }
     html +=`<p class="js-title">${anime.title}</p>
     </li>`;
     html += `</li>`;
@@ -58,7 +67,7 @@ function renderHTML(){
     let classFavourite = '';
 
     for (const anime of animes) {
-
+      const wrongImg = 'https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png';
       const favouriteFoundIndex = favourites.findIndex((fav) => anime.title === fav.title);
       if (favouriteFoundIndex !== -1){
         classFavourite = '--favourite';
@@ -67,13 +76,25 @@ function renderHTML(){
       }else{
         classFavourite = '';
       }
-           
-            html += `<li class="list${classFavourite} js-list-anime" id="${anime.title}">`;
-            html+= `<img
+
+      html += `<li class="list${classFavourite} js-list-anime" id="${anime.title}">`;
+
+      if( anime.images.jpg.image_url === wrongImg){
+        html+= `<img
+            src=${'https://via.placeholder.com/210x295/ffffff/666666/?text=ANIME'}
+            alt="img"
+            class="image js-img"/>`;
+      }
+      else {
+        html+= `<img
             src=${anime.images.jpg.image_url}
             alt="img"
             class="image js-img"
           />`;
+      }
+           
+            
+            
           html +=`<p class="js-title">${anime.title}</p>
           </li>`;
           html += `</li>`;
@@ -98,8 +119,11 @@ function getDataFromApi(){
       console.log(animes);
 
     });
-    renderHTML();
-    listenerAnime();
+
+ 
+
+  renderHTML();
+  listenerAnime();
 }    
     
 
@@ -155,11 +179,7 @@ function onLoad(){
 onLoad();
 
 //FUNCION BUSCAR ANIMES SIN IMG:
-function findAnimeWrongImg(){
- const wrongPictureAnime = animes.filter((anime) => anime.images.jpg.image_url  === 'https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png');
-  console.log(wrongPictureAnime);
-}
-findAnimeWrongImg();
+
 
 
 //EVENTOS:

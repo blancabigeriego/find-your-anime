@@ -33,7 +33,7 @@ function renderFavouriteList(favourites){
   for (const anime of favourites){
     const wrongImg = 'https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png';
 
-    html += `<li class="list--favourite js-list-anime" id="${anime.title}">`;
+    html += `<li class="list--favourite" id="${anime.title}">`;
     if( anime.images.jpg.image_url === wrongImg){
       html+= `<img
           src=${'https://via.placeholder.com/210x295/ffffff/666666/?text=FAV-ANIME'}
@@ -132,6 +132,7 @@ function handleClick(ev) {
 function handleFavouriteClick(event){
   
   const idSelected = event.currentTarget.id;
+  console.log('clique en' + event.currentTarget.id);
   const animeFound = animes.find((anime)=> anime.title === idSelected);
   const favouriteFound = favourites.findIndex((fav)=> fav.title === idSelected);
   if(favouriteFound === -1){

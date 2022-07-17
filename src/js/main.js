@@ -28,7 +28,7 @@ let favourites = [];
 //FUNCIONES
 
 
-function renderFavouriteList(){
+function renderFavouriteList(favourites){
   let html = '';
   for (const anime of favourites){
     const wrongImg = 'https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png';
@@ -66,7 +66,7 @@ function renderHTML(){
     const favouriteFoundIndex = favourites.findIndex((fav) => anime.title === fav.title);
     if (favouriteFoundIndex !== -1){
       classFavourite = '--favourite';
-      renderFavouriteList();
+      renderFavouriteList(favourites);
 
     }else{
       classFavourite = '';
@@ -113,9 +113,10 @@ function getDataFromApi(){
   listenerAnime();
 }    
     
-function setLs(){
+function setLs(favourites){
   localStorage.setItem('fav', JSON.stringify(favourites));
   renderHTML();
+  
   listenerAnime();
 }
 
@@ -140,7 +141,7 @@ function handleFavouriteClick(event){
   }
 
   console.log(favourites);
-  setLs();
+  setLs(favourites);
 }
 
 
@@ -162,7 +163,8 @@ function onLoad(){
   const dataLocalStorage = JSON.parse(localStorage.getItem('fav'));
   if(dataLocalStorage){
     favourites = dataLocalStorage;
-    renderFavouriteList(dataLocalStorage);
+    renderFavouriteList(favourites);
+
     console.log('Hay cosas en el LS');
 
 
@@ -178,4 +180,3 @@ onLoad();
 //EVENTOS:
 btnSearch.addEventListener('click', handleClick);
 btnReset.addEventListener('click',handleReset);
-

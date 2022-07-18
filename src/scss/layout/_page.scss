@@ -5,14 +5,15 @@
   flex-direction: column;
   
 }
-.res{
+.container{
   display: flex;
   flex-wrap: wrap;
 }
 .h2{
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   color: whitesmoke;
-  display:block;
+  
+  
 }
 .results{
   display: flex;
@@ -101,4 +102,5 @@
 
 .icon{
   padding-bottom: 14px;
+  cursor: pointer;
 }

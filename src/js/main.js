@@ -109,7 +109,7 @@ function renderHTML(){
   if (html === ''){
     ulResults.innerHTML ='';
   }else{
-    ulResults.innerHTML = `<h2 class="h2">Resultados:</h2>${html}`;
+    ulResults.innerHTML = `<h2 class="h2">Resultados:</h2><section class="container">${html}</section>`;
   }
         
   listenerAnime();

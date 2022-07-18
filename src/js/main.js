@@ -27,6 +27,7 @@ let favourites = [];
 
 
 
+
 //FUNCIONES
 
 
@@ -50,18 +51,20 @@ function renderFavouriteList(favourites){
           class="image js-img"
         />`;
     }
-    html +=`<p class="js-title favtitle">${anime.title}</p> <i class="js-icon fa-solid fa-circle-xmark icon"></i>
+    html +=`<p class="js-title favtitle">${anime.title}</p> <i class="js-icon fa-solid fa-circle-xmark icon" id=${anime.mal_id}></i>
     </li>`;
     html += `</li>`;
   }
-  const icons = document.querySelectorAll('.js-icon');
-  addListenerIcons();
+  
 
   if(favourites === ''){
     ulResultFavourites.innerHTML = '';
   }else{
     ulResultFavourites.innerHTML = `<h2>Series favoritas:<h2>${html}`;
-   
+
+   const icons = document.querySelectorAll('.js-icon');
+    console.log(icons);
+    addListenerIcons(icons);
 
   }}
 
@@ -121,8 +124,9 @@ function getDataFromApi(){
     .then((data) => {
       animes = data.data;
       console.log(animes);
+      renderHTML();
     });
-  renderHTML();
+ 
   listenerAnime();
 }    
     
@@ -132,9 +136,7 @@ function setLs(favourites){
   listenerAnime();
 }
 
-function handleIconClick(){
-  console.log('Hey hey hey');
-}
+
 
 //FUNCIONES DE EVENTO
 
@@ -143,7 +145,22 @@ function handleClick(ev) {
   getDataFromApi();
 }
 
+function handleIconClick(event){
 
+  const idSelected = parseInt(event.currentTarget.id);
+  console.log(idSelected);
+  const iconClicked = favourites.find((favourite)=> favourite.mal_id===idSelected);
+  console.log(iconClicked);
+  const iconIndex = favourites.findIndex((fav)=> fav.mal_id ===idSelected);
+  console.log(iconIndex);
+
+  if(iconIndex !== -1){
+    favourites.splice(iconClicked,1);
+  }
+
+  setLs(favourites);
+  renderFavouriteList(favourites);
+}
 
 function handleFavouriteClick(event){
   
@@ -157,7 +174,7 @@ function handleFavouriteClick(event){
     favourites.splice(favouriteFound, 1);
   }
   
-  console.log(favourites);
+  
   setLs(favourites);
   renderFavouriteList(favourites);
 }
@@ -176,10 +193,10 @@ function handleReset(ev){
   ulResults.innerHTML = '';
 }
 
-function addListenerIcons(){
-  
+function addListenerIcons(icons){
   for (const icon of icons) {
     icon.addEventListener('click', handleIconClick);
+    
   }
 }
 

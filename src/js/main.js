@@ -55,7 +55,7 @@ function renderFavouriteList(favourites){
     html += `</li>`;
   }
   const icons = document.querySelectorAll('.js-icon');
-  addListenerIcons(icons);
+  addListenerIcons();
 
   if(favourites === ''){
     ulResultFavourites.innerHTML = '';
@@ -156,9 +156,10 @@ function handleFavouriteClick(event){
 } else {
     favourites.splice(favouriteFound, 1);
   }
-
+  
   console.log(favourites);
   setLs(favourites);
+  renderFavouriteList(favourites);
 }
 
 
@@ -175,7 +176,7 @@ function handleReset(ev){
   ulResults.innerHTML = '';
 }
 
-function addListenerIcons(icons){
+function addListenerIcons(){
   
   for (const icon of icons) {
     icon.addEventListener('click', handleIconClick);

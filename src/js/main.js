@@ -60,7 +60,7 @@ function renderFavouriteList(favourites){
   if(favourites === ''){
     ulResultFavourites.innerHTML = '';
   }else{
-    ulResultFavourites.innerHTML = `<h2>Series favoritas:<h2>${html}`;
+    ulResultFavourites.innerHTML = `<h2 class="h2">Series favoritas:<h2>${html}`;
 
    const icons = document.querySelectorAll('.js-icon');
     console.log(icons);
@@ -109,7 +109,7 @@ function renderHTML(){
   if (html === ''){
     ulResults.innerHTML ='';
   }else{
-    ulResults.innerHTML = `<h2>Resultados:</h2>${html}`;
+    ulResults.innerHTML = `<h2 class="h2">Resultados:</h2>${html}`;
   }
         
   listenerAnime();

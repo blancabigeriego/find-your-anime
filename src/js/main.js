@@ -204,16 +204,17 @@ function addListenerIcons(icons){
 
 function onLoad(){
   const dataLocalStorage = JSON.parse(localStorage.getItem('fav'));
-  if(dataLocalStorage){
+  if(dataLocalStorage && dataLocalStorage.length > 0){
     favourites = dataLocalStorage;
     renderFavouriteList(favourites);
 
     console.log('Hay cosas en el LS');
 
 
-  }else{
-    getDataFromApi();
   }
+  //else{
+    //getDataFromApi();
+  //}
 }
 onLoad();
 

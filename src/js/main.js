@@ -68,6 +68,8 @@ function renderFavouriteList(favourites){
 
     const icons = document.querySelectorAll('.js-icon');
     const deleteBtn = document.querySelector('.js-delete');
+    
+
     addListenerDeleteBtn(deleteBtn);
     addListenerIcons(icons);
 

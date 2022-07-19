@@ -12,19 +12,23 @@
     ></script>
   </head>
 
-  <body>
-    <header>
+  <body class="body">
+    <header class="header">
       <h1>Buscador de series de anime</h1>
     </header>
     <main>
-      <form action="">
-        <input type="text" class="js-input" placeholder="Ej: Naruto" />
-        <button class="js-btn-search">Buscar</button>
-        <button class="js-btn-reset">Reset</button>
+      <form action="" class="form">
+        <input
+          type="text"
+          class="form__item js-input"
+          placeholder="Ej: Naruto"
+        />
+        <button class="form__item--search js-btn-search">Buscar</button>
+        <button class="form__item--reset js-btn-reset">Reset</button>
       </form>
       <section class="results">
-        <ul class="js-result-favourites"></ul>
-        <ul class="js-result-list"></ul>
+        <ul class="js-result-favourites fav"></ul>
+        <ul class="js-result-list res"></ul>
       </section>
     </main>
     <script src="./assets/js/main.js"></script>

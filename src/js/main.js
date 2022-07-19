@@ -63,7 +63,6 @@ function renderFavouriteList(favourites){
     ulResultFavourites.innerHTML = `<h2 class="h2">Series favoritas:<h2>${html}`;
 
    const icons = document.querySelectorAll('.js-icon');
-    console.log(icons);
     addListenerIcons(icons);
 
   }}
@@ -123,7 +122,6 @@ function getDataFromApi(){
     .then((response) => response.json())
     .then((data) => {
       animes = data.data;
-      console.log(animes);
       renderHTML();
     });
  
@@ -148,11 +146,9 @@ function handleClick(ev) {
 function handleIconClick(event){
 
   const idSelected = parseInt(event.currentTarget.id);
-  console.log(idSelected);
   const iconClicked = favourites.find((favourite)=> favourite.mal_id===idSelected);
-  console.log(iconClicked);
   const iconIndex = favourites.findIndex((fav)=> fav.mal_id ===idSelected);
-  console.log(iconIndex);
+
 
   if(iconIndex !== -1){
     favourites.splice(iconClicked,1);
@@ -165,7 +161,6 @@ function handleIconClick(event){
 function handleFavouriteClick(event){
   
   const idSelected = event.currentTarget.id;
-  console.log('clique en ' + event.currentTarget.id);
   const animeFound = animes.find((anime)=> anime.title === idSelected);
   const favouriteFound = favourites.findIndex((fav)=> fav.title === idSelected);
   if(favouriteFound === -1){
@@ -208,13 +203,8 @@ function onLoad(){
     favourites = dataLocalStorage;
     renderFavouriteList(favourites);
 
-    console.log('Hay cosas en el LS');
-
-
   }
-  //else{
-    //getDataFromApi();
-  //}
+
 }
 onLoad();
 

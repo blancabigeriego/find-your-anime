@@ -30,6 +30,7 @@ let favourites = [];
 
 
 
+
 //FUNCIONES
 
 
@@ -63,11 +64,11 @@ function renderFavouriteList(favourites){
   if(favourites === ''){
     ulResultFavourites.innerHTML = '';
   }else{
-    ulResultFavourites.innerHTML = `<h2 class="h2">Series favoritas:<h2>${html}<button class= "delete js-delete">Borrar todos</button>`;
+    ulResultFavourites.innerHTML = `<section class="section-fav"><h2 class="h2">Series favoritas:</h2>${html}<button class= "delete js-delete">Borrar todos</button></section>`;
 
-   const icons = document.querySelectorAll('.js-icon');
-   const deleteBtn = document.querySelector('.js-delete');
-   addListenerDeleteBtn(deleteBtn);
+    const icons = document.querySelectorAll('.js-icon');
+    const deleteBtn = document.querySelector('.js-delete');
+    addListenerDeleteBtn(deleteBtn);
     addListenerIcons(icons);
 
   }}
@@ -171,11 +172,9 @@ function handleFavouriteClick(event){
   const favouriteFound = favourites.findIndex((fav)=> fav.title === idSelected);
   if(favouriteFound === -1){
     favourites.push(animeFound);
-} else {
+  } else {
     favourites.splice(favouriteFound, 1);
   }
-
-  
   setLs(favourites);
   renderFavouriteList(favourites);
 }

@@ -7,6 +7,8 @@
 
 
 
+
+
 //QUERY SELECTOR
 
 const input = document.querySelector('.js-input');
@@ -54,15 +56,18 @@ function renderFavouriteList(favourites){
     html +=`<p class="js-title favtitle">${anime.title}</p> <i class="js-icon fa-solid fa-circle-xmark icon" id=${anime.mal_id}></i>
     </li>`;
     html += `</li>`;
+    
   }
   
 
   if(favourites === ''){
     ulResultFavourites.innerHTML = '';
   }else{
-    ulResultFavourites.innerHTML = `<h2 class="h2">Series favoritas:<h2>${html}`;
+    ulResultFavourites.innerHTML = `<h2 class="h2">Series favoritas:<h2>${html}<button class= "delete js-delete">Borrar todos</button>`;
 
    const icons = document.querySelectorAll('.js-icon');
+   const deleteBtn = document.querySelector('.js-delete');
+   addListenerDeleteBtn(deleteBtn);
     addListenerIcons(icons);
 
   }}
@@ -83,7 +88,7 @@ function renderHTML(){
     }else{
       classFavourite = '';
     }
-
+  
     html += `<li class="list${classFavourite} js-list-anime" id="${anime.title}">`;
 
     if( anime.images.jpg.image_url === wrongImg){
@@ -162,16 +167,25 @@ function handleFavouriteClick(event){
   
   const idSelected = event.currentTarget.id;
   const animeFound = animes.find((anime)=> anime.title === idSelected);
+ 
   const favouriteFound = favourites.findIndex((fav)=> fav.title === idSelected);
   if(favouriteFound === -1){
     favourites.push(animeFound);
 } else {
     favourites.splice(favouriteFound, 1);
   }
-  
+
   
   setLs(favourites);
   renderFavouriteList(favourites);
+}
+
+function handleDeleteAll(event){
+  event.preventDefault();
+  favourites = [];
+  setLs(favourites);
+  renderFavouriteList(favourites);
+
 }
 
 
@@ -193,6 +207,10 @@ function addListenerIcons(icons){
     icon.addEventListener('click', handleIconClick);
     
   }
+}
+
+function addListenerDeleteBtn(deleteBtn){
+  deleteBtn.addEventListener('click', handleDeleteAll);
 }
 
 //FUNCION LOCAL STORAGE

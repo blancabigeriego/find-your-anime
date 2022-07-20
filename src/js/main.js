@@ -16,7 +16,7 @@ const btnSearch = document.querySelector('.js-btn-search');
 const btnReset = document.querySelector('.js-btn-reset');
 const ulResults = document.querySelector('.js-result-list');
 const ulResultFavourites = document.querySelector('.js-result-favourites');
-
+const log = document.querySelector('.js-log');
 
 
 
@@ -110,15 +110,23 @@ function renderHTML(){
            
             
     html +=`<p class="js-title">${anime.title}</p>
-          </li>`;
+          `;
+    
+          if(anime.score > 7){
+            html += `<p>Recomendada:${anime.score}</p></li>`;
+          }else{
+            html += `<p>${anime.score}</p></li>`;
+          }
+    
     html += `</li>`;}
 
   if (html === ''){
     ulResults.innerHTML ='';
   }else{
     ulResults.innerHTML = `<h2 class="h2">Resultados:</h2><section class="container">${html}</section>`;
+    console.log(animes);
   }
-        
+  
   listenerAnime();
 }
     
@@ -214,6 +222,10 @@ function addListenerDeleteBtn(deleteBtn){
   deleteBtn.addEventListener('click', handleDeleteAll);
 }
 
+function handleLog(){
+  console.log(favourites.length);
+}
+
 //FUNCION LOCAL STORAGE
 
 function onLoad(){
@@ -233,4 +245,4 @@ onLoad();
 //EVENTOS:
 btnSearch.addEventListener('click', handleClick);
 btnReset.addEventListener('click',handleReset);
-
+log.addEventListener('click', handleLog);
